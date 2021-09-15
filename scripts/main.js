@@ -8,16 +8,25 @@ let dy = -2;
 
 let ballRadius = 10;
 
-ctx.beginPath();
-ctx.rect(20, 40, 50, 50);
-ctx.fillStyle = "#FF0000";
-ctx.fill();
-ctx.closePath();
+let paddleHeight = 10;
+let paddleWidth = 75;
+let paddleX = (canvas.width-paddleWidth) / 2;
+
+let leftPressed = false;
+let rightPressed = false;
 
 function drawBall() {
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
     ctx.strokeStyle = "#00FF00";
+    ctx.fill();
+    ctx.closePath();
+}
+
+function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = "#0000FF";
     ctx.fill();
     ctx.closePath();
 }
@@ -34,6 +43,19 @@ function draw() {
         dy = -dy;
     }
 }
+
+function keyDownHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = true;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = true;
+    }
+}
+
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
 setInterval(draw, 10);
 
 ctx.beginPath();

@@ -23,6 +23,22 @@ let brickPadding = 10;
 let brickOffsetTop = 30;
 let brickOffsetLeft = 30;
 
+let bricks = [];
+for (let c=0; c < brickColumnCount; c++) {
+    bricks[c] = [];
+    for(let r = 0; r < brickRowCount; r++) {
+        bricks[c][r] = {x: 0, y: 0};
+    }
+}
+
+function drawBricks() {
+    for(let c = 0; c < brickColumnCount: c++) {
+        for(let r + 0; r < brickRowCount; r++) {
+            
+        }
+    }
+}
+
 function drawBall() {
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);

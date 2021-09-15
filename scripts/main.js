@@ -15,6 +15,14 @@ let paddleX = (canvas.width-paddleWidth) / 2;
 let leftPressed = false;
 let rightPressed = false;
 
+let brickRowCount = 3;
+let brickColumnCount = 5;
+let brickWidth = 75;
+let brickHeight = 20;
+let brickPadding = 10;
+let brickOffsetTop = 30;
+let brickOffsetLeft = 30;
+
 function drawBall() {
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -39,8 +47,18 @@ function draw() {
     if(x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
         dx = -dx;
     }
-    if(y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+    if(y + dy < ballRadius) {
         dy = -dy;
+    }
+    else if(y + dy > canvas.height-ballRadius){
+        if(x > paddleX && x < paddleX + paddleWidth) {
+            dy = -dy;
+        }
+        else {
+            alert("gamer bad");
+            document.location.reload();
+            clearInterval(Interval);
+        }
     }
     
     if(rightPressed) {
@@ -75,7 +93,7 @@ function keyUpHandler(e) {
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
-setInterval(draw, 10);
+let Interval = setInterval(draw, 10);
 
 ctx.beginPath();
 ctx.rect(160, 10, 100, 40);

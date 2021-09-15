@@ -47,7 +47,7 @@ function draw() {
         paddleX += 7;
     }
     else if(leftPressed) {
-        paddleX -+ 7;
+        paddleX -= 7;
     }
 
     drawPaddle();
@@ -60,6 +60,15 @@ function keyDownHandler(e) {
     }
     else if(e.key == "Left" || e.key == "ArrowLeft") {
         leftPressed = true;
+    }
+}
+
+function keyUpHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = false;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = false;
     }
 }
 

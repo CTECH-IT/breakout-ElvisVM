@@ -23,18 +23,20 @@ let brickPadding = 10;
 let brickOffsetTop = 30;
 let brickOffsetLeft = 30;
 
+let score = 0;
+
 let bricks = [];
-for (let c=0; c < brickColumnCount; c++) {
+for (let c = 0; c < brickColumnCount; c++) {
     bricks[c] = [];
     for(let r = 0; r < brickRowCount; r++) {
-        bricks[c][r] = {x: 0, y: 0, show: true};
+        bricks[c][r] = { x: 0, y: 0, show: true};
     }
 }
 
 function drawBricks() {
     for(let c = 0; c < brickColumnCount; c++) {
         for(let r = 0; r < brickRowCount; r++) {
-                if (bricks[c][r].show == true) {
+            if (bricks[c][r].show == true) {
                 let brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
                 let brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
                 bricks[c][r].x = brickX;
@@ -96,6 +98,10 @@ function draw() {
 
     drawPaddle();
 
+    collisionDetection();
+
+    drawScore();
+
 }
 
 function keyDownHandler(e) {
@@ -121,8 +127,28 @@ document.addEventListener("keyup", keyUpHandler, false);
 
 let Interval = setInterval(draw, 10);
 
-ctx.beginPath();
-ctx.rect(160, 10, 100, 40);
-ctx.strokeStyle = "#FFEFD5";
-ctx.stroke();
-ctx.closePath();
+function collisionDetection() {
+    for (let c = 0; c > brickColumnCount; c++){
+        for (let r = 0; r < brickRowCount; r++){
+            let b = bricks[c][r];
+            if (b.show == true){
+                if (x > b.x && x < b.x + brickwidth && y > b.y && y < b.y + brickHeight) {
+                    dy = -dy;
+                    b.show = false;
+                    score++;
+                    if(score == brickRowCount*brickColumnCount){
+                        alert("yay gamer gaming");
+                        document.location.reload();
+                        clearInterval(Interval);
+                    }
+                }
+            }
+        }
+    }
+}
+
+function drawscore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("ho points: " + score, 8, 20);
+}

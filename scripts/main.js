@@ -140,7 +140,7 @@ function collisionDetection() {
                     if (score == brickRowCount * brickColumnCount) {
                         alert("yay gamer gaming");
                         document.location.reload();
-                        clearInterval(interval);
+                        clearInterval(Interval);
                     }
                 }
             }

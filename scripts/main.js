@@ -43,7 +43,7 @@ function drawBricks() {
                 bricks[c][r].y = brickY;
                 ctx.beginPath();
                 ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                ctx.fillStyle = "0095DD"
+                ctx.fillStyle = "#FF0000";
                 ctx.fill();
                 ctx.closePath();
             }
@@ -54,7 +54,7 @@ function drawBricks() {
 function drawBall() {
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-    ctx.strokeStyle = "#00FF00";
+    ctx.fillStyle = "#FFFFFF";
     ctx.fill();
     ctx.closePath();
 }
@@ -87,7 +87,7 @@ function collisionDetection() {
     }
 }
 
-function drawscore() {
+function drawScore() {
     ctx.font = "16px Arial";
     ctx.fillStyle = "#0095DD";
     ctx.fillText("ho points: " + score, 8, 20);

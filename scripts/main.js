@@ -94,6 +94,12 @@ function drawScore() {
     ctx.fillText("ho points: " + score, 8, 20);
 }
 
+function drawLives() {
+    ctx.font = "16px Helvetica";
+    ctx.fillStyle = "#FF0000";
+    ctx.fillText("hp:"+ hp, 9, 20);
+}
+
 function keyDownHandler(e) {
     if (e.key == "Right" || e.key == "ArrowRight") {
         rightPressed = true;

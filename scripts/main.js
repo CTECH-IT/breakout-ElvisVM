@@ -6,6 +6,8 @@ let y = canvas.height - 30;
 let dx = 2;
 let dy = -2;
 
+let one = 1;
+
 let ballRadius = 10;
 
 let paddleHeight = 10;
@@ -31,6 +33,18 @@ for (let c = 0; c < brickColumnCount; c++) {
     bricks[c] = [];
     for (let r = 0; r < brickRowCount; r++) {
         bricks[c][r] = { x: 0, y: 0, show: true };
+    }
+}
+
+function endgame(){
+    alert("gamer not gaming");
+    document.location.reload();
+    clearInterval(Interval);
+}
+
+function helpme() {
+    if(hp == 0){
+        endgame()
     }
 }
 
@@ -97,7 +111,7 @@ function drawScore() {
 function drawLives() {
     ctx.font = "16px Helvetica";
     ctx.fillStyle = "#FF0000";
-    ctx.fillText("hp:"+ hp, 9, 20);
+    ctx.fillText("lives: "+ hp, 400, 20);
 }
 
 function keyDownHandler(e) {
@@ -134,18 +148,10 @@ function draw() {
         if (x > paddleX && x < paddleX + paddleWidth) {
             dy = -dy;
         }
-        else if(hp = 0){
-            alert("gamer bad");
-            document.location.reload();
-            clearInterval(Interval);
-        }
         else {
             x = canvas.width / 2;
-            y = canvas.height / 2;
-
-            let hp2 = hp;
-            hp2 = hp - 1
-            hp = hp2
+            y = canvas.height / 2;   
+            hp -= one;
         }
     }
 
@@ -161,6 +167,10 @@ function draw() {
     collisionDetection();
 
     drawScore();
+
+    helpme();
+
+    drawLives();
 
 }
 
